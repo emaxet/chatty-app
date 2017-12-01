@@ -12,8 +12,7 @@ class App extends Component {
       userColor: '#000000',
       nameChange: '',
       onlineUsers: 0,
-      messages: [],
-      notifications: []
+      messages: []
     };
 
     this.onNewMessage = this.onNewMessage.bind(this);
@@ -28,7 +27,7 @@ class App extends Component {
   }
 
   onNameChange(name) {
-    const nameChange = {type: 'postNotification', content: `${this.state.currentUser} has changed their name to ${name}` }
+    const nameChange = {type: 'postNotification', notification: `${this.state.currentUser} has changed their name to ${name}` }
     this.setState({ currentUser: name});
     this.ws.send(JSON.stringify(nameChange));
   }
@@ -43,7 +42,7 @@ class App extends Component {
         newMessage['color'] = this.state.userColor;
         this.setState({ messages: this.state.messages.concat(newMessage)});
       } else if (newMessage.type === 'incomingNotification') {
-        this.setState({ notifications: this.state.notifications.concat(newMessage)});
+        this.setState({ messages: this.state.messages.concat(newMessage)});
       } else if (newMessage.type === 'newClient') {
         this.setState({ onlineUsers: newMessage.onlineUsers, userColor: newMessage.userColor });
       } else if (newMessage.type === 'lostClient') {
@@ -62,7 +61,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
           <p className="online-users">{onlineUsers} users online</p>
         </nav>
-        <MessageList messages= { messages } userColor={ messages.color } nameChange={ notifications } />
+        <MessageList messages= { messages } userColor={ messages.color } />
         <ChatBar currentUser= { currentUser } onSend={ this.onNewMessage } nameChange={ this.onNameChange } />
       </div>
     );
