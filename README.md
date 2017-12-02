@@ -7,7 +7,7 @@ A light weight and user-friendly chat client that you can use to keep in touch w
 
 1. Clone this repository.
 2. Run npm install --save
-3. Run node server.js in the root "chatty-app" folder
+3. Run node app.js in the root "chatty-app" folder
 4. Run node ws-server.js in ~/server folder
 5. App will be accessible at localhost:3000 on your browser of choice.
 
