@@ -9,7 +9,6 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: 'Erik',
-      userColor: '#000000',
       onlineUsers: 0,
       messages: []
     };
@@ -37,16 +36,19 @@ class App extends Component {
     });
     this.ws.addEventListener('message', (msg) => {
       const newMessage = JSON.parse(msg.data);
-      if (newMessage.type === 'incomingMessage') {
-        this.setState({ messages: this.state.messages.concat(newMessage)});
-      } else if (newMessage.type === 'incomingNotification') {
-        this.setState({ messages: this.state.messages.concat(newMessage)});
-      } else if (newMessage.type === 'newClient') {
-        this.setState({ onlineUsers: newMessage.onlineUsers });
-      } else if (newMessage.type === 'lostClient') {
-        this.setState({ onlineUsers: newMessage.onlineUsers });
-      } else if (newMessage.type === 'userColor') {
-        this.setState({ userColor: newMessage.color });
+
+      switch (newMessage.type) {
+        case 'incomingMessage':
+          this.setState({ messages: this.state.messages.concat(newMessage)});
+          break;
+        case 'incomingNotification':
+          this.setState({ messages: this.state.messages.concat(newMessage)});
+          break;
+        case 'newClient':
+          this.setState({ onlineUsers: newMessage.onlineUsers });
+          break;
+        case 'lostClient':
+          this.setState({ onlineUsers: newMessage.onlineUsers });
       }
     });
   }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import MessageHelper from "./lib/message-helpers.js";
+import MessageHelper from "../lib/message-helpers.js";
 
 export class Message extends React.Component {
 
