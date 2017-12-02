@@ -11,6 +11,10 @@ A light weight and user-friendly chat client that you can use to keep in touch w
 4. Run node ws-server.js in ~/server folder
 5. App will be accessible at localhost:3000 on your browser of choice.
 
+## Final Product
+
+!["Screenshot of 4 connected chat clients"](https://github.com/emaxet/chatty-app/blob/master/build/chatty.png)
+
 ### Dependencies
 
 "babel-core": "6.23.1",
